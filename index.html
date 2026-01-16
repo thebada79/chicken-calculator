@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>치킨 수수료 계산기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 420px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px 0 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: right;
+    }
+    th {
+      background: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+<h2>치킨 배달 수수료 계산기</h2>
+
+<label>판매가 입력</label>
+<input type="number" id="price" placeholder="예: 19900" oninput="calc()"/>
+
+<table>
+  <tr>
+    <th>항목</th>
+    <th>배민가게</th>
+    <th>배민배달/쿠팡</th>
+    <th>요기요</th>
+    <th>땡겨요</th>
+  </tr>
+  <tr>
+    <td>중개수수료</td>
+    <td id="bm1"></td>
+    <td id="bm2"></td>
+    <td id="yg"></td>
+    <td id="tg"></td>
+  </tr>
+  <tr>
+    <td>배달비</td>
+    <td>0</td>
+    <td>3,100</td>
+    <td>3,190</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><b>실입금</b></td>
+    <td id="r1"></td>
+    <td id="r2"></td>
+    <td id="r3"></td>
+    <td id="r4"></td>
+  </tr>
+</table>
+
+<script>
+function calc() {
+  const p = Number(document.getElementById("price").value || 0);
+
+  const bm1 = Math.round(p * 0.068);
+  const bm2 = 1552;
+  const yg = 2123;
+  const tg = 438;
+
+  document.getElementById("bm1").innerText = bm1.toLocaleString();
+  document.getElementById("bm2").innerText = bm2.toLocaleString();
+  document.getElementById("yg").innerText = yg.toLocaleString();
+  document.getElementById("tg").innerText = tg.toLocaleString();
+
+  document.getElementById("r1").innerText = (p - bm1).toLocaleString();
+  document.getElementById("r2").innerText = (p - bm2 - 3100).toLocaleString();
+  document.getElementById("r3").innerText = (p - yg - 3190).toLocaleString();
+  document.getElementById("r4").innerText = (p - tg).toLocaleString();
+}
+</script>
+
+</body>
+</html>
